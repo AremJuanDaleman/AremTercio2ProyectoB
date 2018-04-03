@@ -9,6 +9,7 @@ package main.httpserver;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -21,6 +22,8 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import main.httpserver.api.Api;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.Resource;
 
 /**
  *
@@ -67,10 +70,16 @@ public class HttpServer implements Runnable{
             if(inputLine.startsWith("GET")){
                 String path = inputLine.split(" ")[1];
                 if(path.equals("/") || path.equals("/index.html")){
-                    File indexFile = new File(HttpServer.class.getResource("/index.html").getFile());
-                    String output = null;
+                    Resource indexFile = new ClassPathXmlApplicationContext("applicationContext.xml").getResource("/index.html");
+                    String output = "";
                     try {
-                        output = FileUtils.readFileToString(indexFile, StandardCharsets.UTF_8);
+                        InputStream input = indexFile.getInputStream();
+                        BufferedReader br = new BufferedReader(new InputStreamReader(input));
+                        String text;
+                        while ((text = br.readLine()) != null) {
+                           output+=text;                        
+                        }           
+                        br.close();
                     } catch (IOException ex) {
                         Logger.getLogger(HttpServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
