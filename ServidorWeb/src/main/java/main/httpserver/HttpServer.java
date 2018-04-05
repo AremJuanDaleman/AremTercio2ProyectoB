@@ -72,10 +72,9 @@ public class HttpServer implements Runnable{
                 String path = inputLine.split(" ")[1];
                 if(path.equals("/") || path.equals("/index.html")){                    
                     //Resource indexFile = new ClassPathXmlApplicationContext("applicationContext.xml").getResource("/index.html");
-                    File indexFile =new File(getClass().getResource("/index.html").getFile());                    
+                    File indexFile =new File("src/main/java/main/httpserver/index.html");                    
                     String output="";
-                    String text;
-                    
+                    String text;                    
                     try {                        
                         FileReader input = new FileReader(indexFile);                        
                         BufferedReader br = new BufferedReader(input);

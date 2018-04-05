@@ -35,13 +35,11 @@ public class Cubo implements Api {
             }
         }catch (IOException x) {
             System.err.println(x);
-        }                
+        }                        
         
-        int numi = Integer.parseInt(res);                
-        int rese = numi+numi;
-        String resultado = String.valueOf(rese);
+        res=res+"Esto es una prueba adicional";
         
-        return resultado;
+        return res;
     }
     
 }
