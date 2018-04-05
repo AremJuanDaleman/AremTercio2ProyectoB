@@ -10,8 +10,7 @@ import java.net.ServerSocket;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 
 
 /**
@@ -21,14 +20,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(8080);
-        ExecutorService executor = Executors.newFixedThreadPool(1);
-        
-        ApplicationContext apli = new ClassPathXmlApplicationContext("applicationContext.xml");
-        
-        IntermediarioBean inter = apli.getBean(IntermediarioBeanImpl.class);
-        
-        
-        executor.execute(new HttpServer(serverSocket, inter));          
+        ExecutorService executor = Executors.newFixedThreadPool(1);                                             
+        executor.execute(new HttpServer(serverSocket));          
         
     }  
 }

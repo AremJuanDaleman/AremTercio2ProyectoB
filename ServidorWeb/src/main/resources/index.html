@@ -31,9 +31,12 @@
                             <div class="col-md-8">
                                 <input id="num" name="num" type="number" placeholder="Ingrese el numero" class="form-control">
                             </div>
+                            <div class="col-md-8">
+                                <input id="tipo" name="tipo" type="text" placeholder="Ingrese operacion" class="form-control">
+                            </div>
                         </div>                        
                         
-                        <input type="submit" value="Submit" class="btn btn-primary btn-lg" onclick='this.form.action="/solicitud/"+ document.getElementById("num").value;'>
+                        <input type="submit" value="Submit" class="btn btn-primary btn-lg" onclick='this.form.action="/solicitud/"+ document.getElementById("tipo").value +"/" + document.getElementById("num").value;'>
                            
                         
                     </fieldset>

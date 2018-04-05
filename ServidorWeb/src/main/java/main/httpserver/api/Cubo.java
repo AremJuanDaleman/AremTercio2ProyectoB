@@ -4,18 +4,20 @@
  * and open the template in the editor.
  */
 package main.httpserver.api;
-import java.io.*;
-import java.net.*;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.springframework.stereotype.Service;
+
 /**
  *
- * @author 2107990
+ * @author 2108419
  */
-
-@Service
-public class Restapi implements Api {        
+public class Cubo implements Api {        
     
     @Override
     public String getResult(String num){
@@ -24,7 +26,7 @@ public class Restapi implements Api {
         try {
             restApi = new URL("https://proyectoarem2.herokuapp.com/"+num);
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Restapi.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Cuadrado.class.getName()).log(Level.SEVERE, null, ex);
         }
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(restApi.openStream()))) {
             String inputLine = null;
@@ -33,9 +35,13 @@ public class Restapi implements Api {
             }
         }catch (IOException x) {
             System.err.println(x);
-        }
+        }                
         
-        return res;
+        int numi = Integer.parseInt(res);                
+        int rese = numi+numi;
+        String resultado = String.valueOf(rese);
+        
+        return resultado;
     }
     
 }
